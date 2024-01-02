@@ -4,13 +4,32 @@ import Container from "./container/container";
 import Logo from "./logo";
 import LogoutBtn from "./logoutBtn";
 import RTE from "./RTE";
+import SignUp from './signUp'
+import Login from './login';
+import PostForm from './post-form/PostFrom'
+import PostCard from './postCard'
+import Authlayout from './AuthLayout'
+import Select from './select'
+import Input from './input'
+import Button from './button'
 
 
 
-export {Header,
+
+
+export {
+    Header,
     Footer,
     Container,
     Logo,
     LogoutBtn,
-    RTE
+    RTE,
+    SignUp,
+    Login,
+    PostForm,
+    PostCard,
+    Authlayout,
+    Input,
+    Select,
+    Button,
 }
