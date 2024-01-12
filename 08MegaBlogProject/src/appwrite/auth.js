@@ -1,61 +1,57 @@
-import conf from "../conf/conf";
-import {Client,Account,ID} from "appwrite"
+import conf from '../conf/conf.js';
+import { Client, Account, ID } from "appwrite";
 
-export class AuthService{
-    client = new Client()
+
+export class AuthService {
+    client = new Client();
     account;
 
-    constructor(){
+    constructor() {
         this.client
-        .setEndpoint(conf.appwriteUrl)
-        .setProject(conf.appwriteProjectId);
+            .setEndpoint("https://cloud.appwrite.io/v1")
+            .setProject("6570270155c5f06c8165");
         this.account = new Account(this.client);
-
+            
     }
 
-    async createAccount({email,password,name}){
+    async createAccount({email, password, name}) {
         try {
             const userAccount = await this.account.create(ID.unique(), email, password, name);
-            if(userAccount){
-                //call another method
+            if (userAccount) {
+                // call another method
                 return this.login({email, password});
-
-            }else{
-                return userAccount;
+            } else {
+               return userAccount;
             }
-            
         } catch (error) {
             throw error;
-            
         }
     }
 
-    async login({email, password}){
+    async login({email, password}) {
         try {
             return await this.account.createEmailSession(email, password);
-            
         } catch (error) {
             throw error;
         }
     }
 
-    async getCurrentUser(){
+    async getCurrentUser() {
         try {
-            await this.account.get()
-            
+            return await this.account.get();
         } catch (error) {
-            throw error;
-            
+            console.log("Appwrite serive :: getCurrentUser :: error", error);
         }
+
         return null;
     }
 
-    async logout(){
+    async logout() {
+
         try {
-            await this.account.deleteSessions()
-            
+            await this.account.deleteSessions();
         } catch (error) {
-           console.log("Appwrite Service :: logout ::error", error);
+            console.log("Appwrite serive :: logout :: error", error);
         }
     }
 }
