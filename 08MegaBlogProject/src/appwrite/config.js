@@ -69,12 +69,13 @@ export class Service{
         }
     }
 
-    async getPost({slug}){
+    async getPost(slug){
         try {
             return await this.databases.getDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug,
+                console.log(conf.appwriteDatabaseId)
             )
             
         } catch (error) {
@@ -82,7 +83,7 @@ export class Service{
         }
     }
 
-    async getPosts(queries = Query.equal["Status","active"]){
+    async getPosts(queries = [Query.equal("Status","active")]){
         try {
             return await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
